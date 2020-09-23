@@ -1,0 +1,15 @@
+GET http://localhost:3000/organizations
+
+
+###
+
+POST http://localhost:3000/organizations
+Content-Type: application/json
+
+{
+    "name": "Test Corp.",
+    "started": "2020-09-30T01:21:33.573Z",
+    "public": true,
+    "employees": 324
+}
+
