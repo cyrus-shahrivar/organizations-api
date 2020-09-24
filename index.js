@@ -8,23 +8,23 @@ app.use(express.json());
 app.get('/organizations', (req, res) => {
     db.findOrganizations(req.query)
         .then((results) => {
-            console.table(results.rows);
             res.json(results.rows);
         })
-        .catch((e) => { console.log('error', e); });
-        // TODO: review database pool closure
-        // TODO: update with success/failure handling
+        .catch((e) => {
+            res.status(500).send('Error');
+        });
 });
 
 app.post('/organizations', (req, res) => {
+    if (!req.body) res.status(500).send('Error');
+
     db.addOrganization(req.body)
         .then((results) => {
-            console.table(results.rows);
             res.status(200).json({results: results.rows});
         })
-        .catch((e) => { console.log('error', e); });
-        // TODO: review database pool closure
-        // TODO: update with success/failure handling
+        .catch((e) => {
+            res.status(500).send('Error');
+    });
 });
 
 app.listen(port, () => { console.log(`listening on port: ${port}`); });
