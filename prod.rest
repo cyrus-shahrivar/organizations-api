@@ -1,0 +1,13 @@
+GET https://organizations-app.herokuapp.com/organizations
+
+###
+
+POST https://organizations-app.herokuapp.com/organizations
+Content-Type: application/json
+
+{
+    "name": "Test Corp.",
+    "started": "1970-01-01T05:00:00.000Z",
+    "public": true,
+    "employees": 324
+}
