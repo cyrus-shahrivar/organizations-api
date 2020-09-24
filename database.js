@@ -45,7 +45,17 @@ function addOrganization(params) {
 
     return pool
         .connect()
-        .then(() => pool.query(text, values));
+        .then((client) => {
+            return client.query(text, values)
+                .then((results) => {
+                    client.release();
+                    return results;
+                })
+                .catch(err => {
+                    client.release();
+                    console.log(err.stack);
+                });
+        });
 }
 
 function findOrganizations(params) {
@@ -56,7 +66,17 @@ function findOrganizations(params) {
 
     return pool
         .connect()
-        .then(() => pool.query(text));
+        .then((client) => {
+            return client.query(text)
+                .then((results) => {
+                    client.release();
+                    return results;
+                })
+                .catch(err => {
+                    client.release();
+                    console.log(err.stack);
+                });
+        });
 }
 
 module.exports = {
